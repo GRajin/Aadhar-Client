@@ -23,8 +23,9 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding!!.root)
-        binding!!.crdCheck.setOnClickListener { v: View? ->
-
+        binding?.crdCheck?.setOnClickListener {
+            val authIntent = Intent(this, AuthActivity::class.java)
+            startActivity(authIntent)
         }
     }
 
