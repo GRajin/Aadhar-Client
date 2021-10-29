@@ -21,11 +21,11 @@ class MainActivity : AppCompatActivity() {
     var intFinger = 0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityMainBinding.inflate(
-            layoutInflater
-        )
+        binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding!!.root)
-        binding!!.cardView.setOnClickListener { v: View? -> }
+        binding!!.crdCheck.setOnClickListener { v: View? ->
+
+        }
     }
 
     override fun onStart() {
@@ -50,46 +50,25 @@ class MainActivity : AppCompatActivity() {
             when (biometricManager.canAuthenticate(BiometricManager.Authenticators.BIOMETRIC_STRONG or BiometricManager.Authenticators.DEVICE_CREDENTIAL)) {
                 BiometricManager.BIOMETRIC_SUCCESS -> {
                     val executor = ContextCompat.getMainExecutor(this)
-                    val biometricPrompt = BiometricPrompt(
-                        this@MainActivity,
-                        executor,
-                        object : BiometricPrompt.AuthenticationCallback() {
-                            override fun onAuthenticationError(
-                                errorCode: Int,
-                                errString: CharSequence
-                            ) {
+                    val biometricPrompt = BiometricPrompt(this@MainActivity, executor, object : BiometricPrompt.AuthenticationCallback() {
+                            override fun onAuthenticationError(errorCode: Int, errString: CharSequence) {
                                 super.onAuthenticationError(errorCode, errString)
-                                Toast.makeText(
-                                    applicationContext,
-                                    "Authentication error: $errString",
-                                    Toast.LENGTH_SHORT
-                                ).show()
+                                Toast.makeText(applicationContext, "Authentication error: $errString", Toast.LENGTH_SHORT).show()
                                 finish()
                             }
 
                             override fun onAuthenticationSucceeded(result: BiometricPrompt.AuthenticationResult) {
                                 super.onAuthenticationSucceeded(result)
-                                Toast.makeText(
-                                    applicationContext,
-                                    "Authentication succeeded!",
-                                    Toast.LENGTH_SHORT
-                                ).show()
+                                Toast.makeText(applicationContext,"Authentication succeeded!", Toast.LENGTH_SHORT).show()
                             }
 
                             override fun onAuthenticationFailed() {
                                 super.onAuthenticationFailed()
-                                Toast.makeText(
-                                    applicationContext,
-                                    "Authentication failed",
-                                    Toast.LENGTH_SHORT
-                                ).show()
+                                Toast.makeText(applicationContext,"Authentication failed", Toast.LENGTH_SHORT).show()
                                 intFinger += 1
                                 if (intFinger > 5) {
-                                    Toast.makeText(
-                                        applicationContext,
-                                        "Please try after sometime...",
-                                        Toast.LENGTH_SHORT
-                                    ).show()
+                                    intFinger = 0
+                                    Toast.makeText(applicationContext, "Please try after sometime...", Toast.LENGTH_SHORT).show()
                                     finish()
                                 }
                             }
