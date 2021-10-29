@@ -1,4 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="upload_ekyc">Upload EKYC</string>
+    <string name="otp">OTP</string>
+    <string name="send">Send</string>
+    <string name="mobile_number">Aadhar Number</string>
+    <string name="authenticate">Authenticate</string>
+    <string name="prerequisites">Prerequisites</string>
+    <string name="authentication">Authentication</string>
+    <string name="ekyc_authentication">EKYC Authentication</string>
+    <string name="check_in">Check IN</string>
 </resources>

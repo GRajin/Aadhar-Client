@@ -23,7 +23,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding!!.root)
-        binding?.crdCheck?.setOnClickListener {
+        binding?.crdPrerequisites?.setOnClickListener {
             val authIntent = Intent(this, AuthActivity::class.java)
             startActivity(authIntent)
         }
@@ -43,33 +43,52 @@ class MainActivity : AppCompatActivity() {
 
     private fun checkBiometric() {
         val manager = getSystemService(KEYGUARD_SERVICE) as KeyguardManager
-        if (!manager.isKeyguardSecure) {
-            Toast.makeText(this, "Please enable fingerprint in settings.", Toast.LENGTH_LONG).show()
-            finish()
-        } else {
+        if (manager.isKeyguardSecure) {
             val biometricManager = BiometricManager.from(this)
             when (biometricManager.canAuthenticate(BiometricManager.Authenticators.BIOMETRIC_STRONG or BiometricManager.Authenticators.DEVICE_CREDENTIAL)) {
                 BiometricManager.BIOMETRIC_SUCCESS -> {
                     val executor = ContextCompat.getMainExecutor(this)
-                    val biometricPrompt = BiometricPrompt(this@MainActivity, executor, object : BiometricPrompt.AuthenticationCallback() {
-                            override fun onAuthenticationError(errorCode: Int, errString: CharSequence) {
+                    val biometricPrompt = BiometricPrompt(
+                        this@MainActivity,
+                        executor,
+                        object : BiometricPrompt.AuthenticationCallback() {
+                            override fun onAuthenticationError(
+                                errorCode: Int,
+                                errString: CharSequence
+                            ) {
                                 super.onAuthenticationError(errorCode, errString)
-                                Toast.makeText(applicationContext, "Authentication error: $errString", Toast.LENGTH_SHORT).show()
+                                Toast.makeText(
+                                    applicationContext,
+                                    "Authentication error: $errString",
+                                    Toast.LENGTH_SHORT
+                                ).show()
                                 finish()
                             }
 
                             override fun onAuthenticationSucceeded(result: BiometricPrompt.AuthenticationResult) {
                                 super.onAuthenticationSucceeded(result)
-                                Toast.makeText(applicationContext,"Authentication succeeded!", Toast.LENGTH_SHORT).show()
+                                Toast.makeText(
+                                    applicationContext,
+                                    "Authentication succeeded!",
+                                    Toast.LENGTH_SHORT
+                                ).show()
                             }
 
                             override fun onAuthenticationFailed() {
                                 super.onAuthenticationFailed()
-                                Toast.makeText(applicationContext,"Authentication failed", Toast.LENGTH_SHORT).show()
+                                Toast.makeText(
+                                    applicationContext,
+                                    "Authentication failed",
+                                    Toast.LENGTH_SHORT
+                                ).show()
                                 intFinger += 1
                                 if (intFinger > 5) {
                                     intFinger = 0
-                                    Toast.makeText(applicationContext, "Please try after sometime...", Toast.LENGTH_SHORT).show()
+                                    Toast.makeText(
+                                        applicationContext,
+                                        "Please try after sometime...",
+                                        Toast.LENGTH_SHORT
+                                    ).show()
                                     finish()
                                 }
                             }
@@ -86,7 +105,6 @@ class MainActivity : AppCompatActivity() {
                 BiometricManager.BIOMETRIC_ERROR_HW_UNAVAILABLE -> {
                 }
                 BiometricManager.BIOMETRIC_ERROR_NONE_ENROLLED -> {
-                    // Prompts the user to create credentials that your app accepts.
                     var enrollIntent: Intent? = null
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
                         enrollIntent = Intent(Settings.ACTION_BIOMETRIC_ENROLL)
