@@ -15,6 +15,15 @@
         android:theme="@style/Theme.AadharClient"
         tools:ignore="AllowBackup">
         <activity
+            android:name=".OfflineQRActivity"
+            android:exported="false" />
+        <activity
+            android:name=".QRCodeActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ResidentDetailsActivity"
+            android:exported="false" />
+        <activity
             android:name=".EkycActivity"
             android:exported="false" />
         <activity

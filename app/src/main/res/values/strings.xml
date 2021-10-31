@@ -8,4 +8,11 @@
     <string name="authentication">Authentication</string>
     <string name="ekyc_authentication">EKYC Authentication</string>
     <string name="check_in">Check IN</string>
+    <string name="download_ekyc">Download EKYC</string>
+    <string name="select_ekyc">Select EKYC</string>
+    <string name="save">Save</string>
+    <string name="gender">Gender:</string>
+    <string name="dob">DOB:</string>
+    <string name="phone">Phone:</string>
+    <string name="confirm">Confirm</string>
 </resources>

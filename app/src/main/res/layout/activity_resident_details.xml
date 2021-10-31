@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ResidentDetailsActivity">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/imgProf"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_marginTop="100dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="ImageContrastCheck"
+        tools:srcCompat="@tools:sample/avatars[0]" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/gV5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/txtName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:fontFamily="@font/product_sans"
+        android:gravity="center"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        tools:text="Rajin Gangadharan"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/imgProf" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/txtAadhar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:fontFamily="@font/product_sans"
+        android:gravity="center"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        tools:text="XXXX XXXX 4308"
+        app:layout_constraintTop_toBottomOf="@id/txtName"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"/>
+
+    <TextView
+        android:id="@+id/headGen"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textSize="22sp"
+        android:layout_margin="16dp"
+        android:text="@string/gender"
+        android:gravity="end"
+        android:textStyle="bold"
+        android:fontFamily="@font/product_sans"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/gV5"
+        app:layout_constraintTop_toBottomOf="@id/txtAadhar" />
+
+    <TextView
+        android:id="@+id/txtGen"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textSize="22sp"
+        android:layout_margin="16dp"
+        android:gravity="start"
+        android:textStyle="bold"
+        tools:text="Male"
+        android:fontFamily="@font/product_sans"
+        app:layout_constraintLeft_toRightOf="@id/gV5"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/txtAadhar" />
+
+    <TextView
+        android:id="@+id/headDob"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textSize="22sp"
+        android:layout_margin="16dp"
+        android:text="@string/dob"
+        android:gravity="end"
+        android:textStyle="bold"
+        android:fontFamily="@font/product_sans"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/gV5"
+        app:layout_constraintTop_toBottomOf="@id/headGen" />
+
+    <TextView
+        android:id="@+id/txtDob"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textSize="22sp"
+        android:layout_margin="16dp"
+        android:gravity="start"
+        android:textStyle="bold"
+        tools:text="24-02-2003"
+        android:fontFamily="@font/product_sans"
+        app:layout_constraintLeft_toRightOf="@id/gV5"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/txtGen" />
+
+    <TextView
+        android:id="@+id/headPhone"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textSize="22sp"
+        android:layout_margin="16dp"
+        android:text="@string/phone"
+        android:gravity="end"
+        android:textStyle="bold"
+        android:fontFamily="@font/product_sans"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/gV5"
+        app:layout_constraintTop_toBottomOf="@id/headDob" />
+
+    <TextView
+        android:id="@+id/txtPhone"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textSize="22sp"
+        android:layout_margin="16dp"
+        android:gravity="start"
+        android:textStyle="bold"
+        tools:text="9150436546"
+        android:fontFamily="@font/product_sans"
+        app:layout_constraintLeft_toRightOf="@id/gV5"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/txtDob" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnStateless"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:text="@string/confirm"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/txtPhone"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

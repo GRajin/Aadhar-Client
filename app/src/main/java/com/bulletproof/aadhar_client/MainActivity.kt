@@ -6,7 +6,6 @@ import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.provider.Settings
-import android.view.View
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
@@ -23,9 +22,15 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding!!.root)
+
         binding?.crdPrerequisites?.setOnClickListener {
             val authIntent = Intent(this, AuthActivity::class.java)
             startActivity(authIntent)
+        }
+
+        binding?.crdCheckIn?.setOnClickListener() {
+            val intent = Intent(this, OfflineQRActivity::class.java)
+            startActivity(intent)
         }
     }
 

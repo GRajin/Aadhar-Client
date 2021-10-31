@@ -85,6 +85,7 @@ class AuthActivity : AppCompatActivity() {
                     Toast.makeText(this, "Authenticated Successfully", Toast.LENGTH_LONG).show()
                     binding?.progress?.visibility = View.INVISIBLE
                     val kycIntent = Intent(this, EkycActivity::class.java)
+                    kycIntent.putExtra("aadhar", authModel.uid)
                     startActivity(kycIntent)
                     finish()
                 } else {

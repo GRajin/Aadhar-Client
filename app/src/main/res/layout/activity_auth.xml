@@ -29,15 +29,6 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/txtHead"/>
 
-    <View
-        android:id="@+id/v1"
-        android:layout_width="0dp"
-        android:layout_height="1dp"
-        android:layout_margin="12dp"
-        android:background="@color/purple_500"
-        app:layout_constraintLeft_toLeftOf="@id/progress"
-        app:layout_constraintRight_toRightOf="@id/progress"
-        app:layout_constraintTop_toBottomOf="@id/progress"/>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/layPhone"
@@ -52,7 +43,7 @@
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/v1">
+        app:layout_constraintTop_toBottomOf="@id/progress">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/txtPhone"
