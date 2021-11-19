@@ -6,37 +6,29 @@
     android:layout_height="match_parent"
     tools:context=".QRCodeActivity">
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/layOtp"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_margin="30dp"
-        android:hint="@string/otp"
-        app:boxCornerRadiusTopStart="10dp"
-        app:boxCornerRadiusTopEnd="10dp"
-        app:boxCornerRadiusBottomStart="10dp"
-        app:boxCornerRadiusBottomEnd="10dp"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/animQR"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_margin="16dp"
+        app:layout_constraintBottom_toTopOf="@id/btnAuth"
+        app:layout_constraintTop_toTopOf="parent"
+        app:lottie_autoPlay="true"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/txtOtp"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            tools:ignore="SpeakableTextPresentCheck" />
-    </com.google.android.material.textfield.TextInputLayout>
+        app:lottie_loop="true"
+        app:lottie_rawRes="@raw/qr" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnAuth"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/authenticate"
+        android:text="@string/display_qr"
         app:cornerRadius="8dp"
         android:layout_margin="15dp"
+        app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/layOtp"/>
+        app:layout_constraintTop_toBottomOf="@id/animQR" />
 
     <View
         android:id="@+id/viewLine"

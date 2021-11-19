@@ -3,6 +3,14 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Data/Hackathon/Finals/Aadhar-Client/app/src/main/res/drawable/ic_user.xml" value="0.20462962962962963" />
+        <entry key="..\:/Data/Hackathon/Finals/Aadhar-Client/app/src/main/res/layout/activity_auth.xml" value="0.1925925925925926" />
+        <entry key="..\:/Data/Hackathon/Finals/Aadhar-Client/app/src/main/res/layout/activity_ekyc.xml" value="0.1925925925925926" />
+        <entry key="..\:/Data/Hackathon/Finals/Aadhar-Client/app/src/main/res/layout/activity_main.xml" value="0.2" />
+        <entry key="..\:/Data/Hackathon/Finals/Aadhar-Client/app/src/main/res/layout/activity_offline_qractivity.xml" value="0.2" />
+        <entry key="..\:/Data/Hackathon/Finals/Aadhar-Client/app/src/main/res/layout/activity_qrcode.xml" value="0.2" />
+        <entry key="..\:/Data/Hackathon/Finals/Aadhar-Client/app/src/main/res/layout/activity_resident_details.xml" value="0.2" />
+        <entry key="..\:/Data/Hackathon/Finals/Aadhar-Client/app/src/main/res/layout/layout_title.xml" value="0.18" />
         <entry key="..\:/Data/Hackathon/Project/Aadhar-Client/app/src/main/res/drawable/ic_user.xml" value="0.21614583333333334" />
         <entry key="..\:/Data/Hackathon/Project/Aadhar-Client/app/src/main/res/drawable/ic_video.xml" value="0.13518518518518519" />
         <entry key="..\:/Data/Hackathon/Project/Aadhar-Client/app/src/main/res/layout/activity_auth.xml" value="0.18518518518518517" />

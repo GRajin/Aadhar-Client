@@ -1,35 +1,24 @@
 package com.bulletproof.aadhar_client
 
-import androidx.appcompat.app.AppCompatActivity
+import android.content.Context
+import android.content.SharedPreferences
+import android.graphics.Bitmap
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
-import android.widget.Toast
-import com.android.volley.Request
-import com.android.volley.toolbox.JsonObjectRequest
-import com.android.volley.toolbox.Volley
-import com.bulletproof.aadhar_client.databinding.ActivityQrcodeBinding
-import com.bulletproof.aadhar_client.models.Auth
-import com.bulletproof.aadhar_client.models.OTP
-import com.google.android.material.textfield.TextInputEditText
-import org.json.JSONObject
-import java.util.*
-import com.google.zxing.WriterException
-
-import android.graphics.Bitmap
-
-import com.google.zxing.BarcodeFormat
-import android.graphics.Color
 import android.view.View
-
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import com.bulletproof.aadhar_client.databinding.ActivityQrcodeBinding
+import com.google.zxing.BarcodeFormat
+import com.google.zxing.WriterException
 import com.google.zxing.qrcode.QRCodeWriter
-import android.content.SharedPreferences
-import android.content.Context
+import org.json.JSONObject
 
 
 class QRCodeActivity : AppCompatActivity() {
 
     private lateinit var aadhar: String
-    private var otpModel: OTP? = null
     private var binding: ActivityQrcodeBinding? = null
     private var obj: JSONObject? = null
 
@@ -43,30 +32,7 @@ class QRCodeActivity : AppCompatActivity() {
 
         binding?.btnAuth?.setOnClickListener {
             try {
-                val url = "https://stage1.uidai.gov.in/onlineekyc/getAuth/"
-                val requestQueue = Volley.newRequestQueue(this)
-                val otp = (binding?.layOtp?.editText as TextInputEditText).text.toString()
-                val authModel = Auth(otpModel?.uid.toString(), otpModel?.txnId.toString(), otp)
-                val params = JSONObject()
-                params.put("uid", authModel.uid)
-                params.put("txnId", authModel.txnId)
-                params.put("otp", authModel.otp)
-                val objReq = JsonObjectRequest(Request.Method.POST, url, params, { response ->
-                    if (response.getString("status") == "y" || response.getString("errCode") == "null") {
-                        createQR(strEkyc)
-                    } else {
-                        if(response.getString("errCode") == "400") {
-                            Toast.makeText(this, "Invalid OTP value", Toast.LENGTH_LONG).show()
-                        } else {
-                            Toast.makeText(this, "Error occurred", Toast.LENGTH_SHORT).show()
-                            Log.d("Auth", response.getString("errCode"))
-                        }
-                    }
-                }, { error ->
-                    Toast.makeText(this, "Error occurred", Toast.LENGTH_SHORT).show()
-                    Log.d("Auth", error.message.toString())
-                })
-                requestQueue.add(objReq)
+                createQR(strEkyc)
             } catch (e: Exception) {
                 Toast.makeText(this, "Error occurred", Toast.LENGTH_SHORT).show()
                 Log.d("Auth", e.message.toString())
@@ -114,32 +80,5 @@ class QRCodeActivity : AppCompatActivity() {
             e.printStackTrace()
         }
         binding?.btnSave?.visibility = View.VISIBLE
-    }
-
-    override fun onStart() {
-        super.onStart()
-        try {
-            val url = "https://stage1.uidai.gov.in/onlineekyc/getOtp/"
-            val requestQueue = Volley.newRequestQueue(this)
-            val txnID = UUID.randomUUID().toString()
-            otpModel = OTP(aadhar, txnID)
-            val params = JSONObject()
-            params.put("uid", otpModel?.uid)
-            params.put("txnId", otpModel?.txnId)
-            val objRequest = JsonObjectRequest(Request.Method.POST, url, params, { response ->
-                if (response.getString("status") == "y" || response.getString("errCode") == "null") {
-                    Toast.makeText(this, "Otp sent successfully", Toast.LENGTH_LONG).show()
-                } else {
-                    Toast.makeText(this, "Error occurred", Toast.LENGTH_SHORT).show()
-                    Log.d("OTP", response.getString("errCode"))
-                }
-            }, { error ->
-                Toast.makeText(this, "Error occurred", Toast.LENGTH_SHORT).show()
-                Log.d("OTP", error.message.toString())
-            })
-            requestQueue.add(objRequest)
-        } catch (e: Exception) {
-            Log.d("OTP", e.message.toString())
-        }
     }
 }

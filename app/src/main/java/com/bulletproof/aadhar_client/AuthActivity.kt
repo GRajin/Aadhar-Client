@@ -5,7 +5,9 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Toast
+import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.widget.doAfterTextChanged
 import com.android.volley.Request
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
@@ -27,10 +29,23 @@ class AuthActivity : AppCompatActivity() {
         binding = ActivityAuthBinding.inflate(layoutInflater)
         setContentView(binding?.root)
 
+        supportActionBar?.displayOptions = ActionBar.DISPLAY_SHOW_CUSTOM
+        supportActionBar?.setCustomView(R.layout.layout_title)
+
+        (binding?.layPhone?.editText as TextInputEditText).doAfterTextChanged {
+            binding?.btnSend?.isEnabled = true
+            binding?.btnAuth?.isEnabled = false
+        }
+
         binding?.btnSend?.setOnClickListener {
             binding?.progress?.visibility = View.VISIBLE
             val aadhar = (binding?.layPhone?.editText as TextInputEditText).text.toString()
-            sendOtp(aadhar)
+            if(aadhar != "") {
+                binding?.btnSend?.isEnabled = false
+                sendOtp(aadhar)
+            } else {
+                binding?.layPhone?.error = "Please enter your aadhar number"
+            }
             binding?.progress?.visibility = View.INVISIBLE
         }
 
@@ -57,7 +72,11 @@ class AuthActivity : AppCompatActivity() {
                     binding?.layOtp?.isEnabled = true
                     binding?.btnAuth?.isEnabled = true
                 } else {
-                    Toast.makeText(this, "Error occurred", Toast.LENGTH_SHORT).show()
+                    when(response.getString("errCode")) {
+                        "521" -> Toast.makeText(this, "Invalid mobile number", Toast.LENGTH_SHORT).show()
+                        "950" -> Toast.makeText(this, "Could not generate otp", Toast.LENGTH_SHORT).show()
+                        else -> Toast.makeText(this, "Error occurred: ${response.getString("errCode")}", Toast.LENGTH_LONG).show()
+                    }
                     Log.d("OTP", response.getString("errCode"))
                 }
             }, { error ->
@@ -89,11 +108,9 @@ class AuthActivity : AppCompatActivity() {
                     startActivity(kycIntent)
                     finish()
                 } else {
-                    if(response.getString("errCode") == "400") {
-                        Toast.makeText(this, "Invalid OTP value", Toast.LENGTH_LONG).show()
-                    } else {
-                        Toast.makeText(this, "Error occurred", Toast.LENGTH_SHORT).show()
-                        Log.d("Auth", response.getString("errCode"))
+                    when(response.getString("errCode")) {
+                        "400" -> Toast.makeText(this, "Invalid OTP value", Toast.LENGTH_SHORT).show()
+                        else -> Toast.makeText(this, "Error occurred: ${response.getString("errCode")}", Toast.LENGTH_LONG).show()
                     }
                     binding?.progress?.visibility = View.INVISIBLE
                 }

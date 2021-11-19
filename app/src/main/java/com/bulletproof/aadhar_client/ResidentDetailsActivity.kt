@@ -1,6 +1,6 @@
 package com.bulletproof.aadhar_client
 
-import android.app.Activity
+import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
@@ -8,18 +8,18 @@ import android.os.Bundle
 import android.util.Base64
 import android.util.Log
 import android.widget.Toast
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import com.bulletproof.aadhar_client.databinding.ActivityResidentDetailsBinding
 import com.bulletproof.aadhar_client.models.Ekyc
 import org.json.JSONObject
-import java.util.*
 
 
 class ResidentDetailsActivity : AppCompatActivity() {
 
     private var binding: ActivityResidentDetailsBinding? = null
     private lateinit var ekycXml: String
+    private lateinit var strEkyc: String
+    private lateinit var ekyc: Ekyc
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,10 +27,10 @@ class ResidentDetailsActivity : AppCompatActivity() {
         binding = ActivityResidentDetailsBinding.inflate(layoutInflater)
         setContentView(binding?.root)
 
-        val strEkyc = intent.extras?.getString("EKYC").toString()
+        strEkyc = intent.extras?.getString("EKYC").toString()
         ekycXml = intent.extras?.getString("EKYCXML").toString()
 
-        val ekyc = parseJson(strEkyc)
+        ekyc = parseJson(strEkyc)
 
         binding?.txtName?.text = ekyc.name
         val aadharNum = "XXXX XXXX ${ekyc.uid.substring(8, 11)}"
@@ -54,8 +54,10 @@ class ResidentDetailsActivity : AppCompatActivity() {
                 startActivity(intent)
                 finish()
             }
-        } catch (e: Exception) {
+        } catch(e: Exception) {
             Log.d("Stateless", "$e")
+        } catch(ae: ActivityNotFoundException) {
+            Toast.makeText(this, "Please install the Face RD app", Toast.LENGTH_LONG).show()
         }
     }
 

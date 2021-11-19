@@ -2,7 +2,6 @@ package com.bulletproof.aadhar_client
 
 import android.content.Intent
 import android.os.Bundle
-import android.text.method.ScrollingMovementMethod
 import android.util.Log
 import android.view.View
 import android.widget.Toast
@@ -14,9 +13,11 @@ import com.bulletproof.aadhar_client.databinding.ActivityEkycBinding
 import com.bulletproof.aadhar_client.models.Auth
 import com.bulletproof.aadhar_client.models.OTP
 import com.google.android.material.textfield.TextInputEditText
+import org.apache.commons.lang3.StringEscapeUtils
 import org.json.JSONObject
 import org.json.XML
 import java.util.*
+
 
 class EkycActivity : AppCompatActivity() {
 
@@ -24,6 +25,7 @@ class EkycActivity : AppCompatActivity() {
     private lateinit var aadhar: String
     private lateinit var otpModel: OTP
     private var ekycString: String = ""
+    private var escapedStr = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -54,7 +56,7 @@ class EkycActivity : AppCompatActivity() {
             params.put("uid", otpModel.uid)
             params.put("txnId", otpModel.txnId)
             val objRequest = JsonObjectRequest(Request.Method.POST, url, params, { response ->
-                if (response.getString("status") == "y" || response.getString("errCode") == "null") {
+                if(response.getString("status") == "y" || response.getString("errCode") == "null") {
                     Toast.makeText(this, "Otp sent successfully", Toast.LENGTH_LONG).show()
                 } else {
                     Toast.makeText(this, "Error occurred", Toast.LENGTH_SHORT).show()
@@ -65,7 +67,7 @@ class EkycActivity : AppCompatActivity() {
                 Log.d("OTP", error.message.toString())
             })
             requestQueue.add(objRequest)
-        } catch (e: Exception) {
+        } catch(e: Exception) {
             Log.d("OTP", e.message.toString())
         }
     }
@@ -80,10 +82,12 @@ class EkycActivity : AppCompatActivity() {
             params.put("uid", authModel.uid)
             params.put("txnId", authModel.txnId)
             params.put("otp", authModel.otp)
-            val objReq = JsonObjectRequest(Request.Method.POST, url, params, { response ->
-                if (response.getString("status") == "Y" || response.getString("errCode") == "null") {
+
+            val ekycRequest = JsonObjectRequest(Request.Method.POST, url, params, { response ->
+                if(response.getString("status") == "Y" || response.getString("errCode") == "null") {
                     Toast.makeText(this, "Authenticated Successfully", Toast.LENGTH_LONG).show()
                     ekycString = response.getString("eKycString")
+                    escapedStr = StringEscapeUtils.escapeXml11(ekycString)
                     val jsonObj = XML.toJSONObject(ekycString)
                     val detailsIntent = Intent(this, ResidentDetailsActivity::class.java)
                     detailsIntent.putExtra("EKYC", jsonObj.toString())
@@ -102,8 +106,8 @@ class EkycActivity : AppCompatActivity() {
                 Toast.makeText(this, "Error occurred", Toast.LENGTH_SHORT).show()
                 Log.d("Auth", error.message.toString())
             })
-            requestQueue.add(objReq)
-        } catch (e: Exception) {
+            requestQueue.add(ekycRequest)
+        } catch(e: Exception) {
             Toast.makeText(this, "Error occurred", Toast.LENGTH_SHORT).show()
             Log.d("Auth", e.message.toString())
         }

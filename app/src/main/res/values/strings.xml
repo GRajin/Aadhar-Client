@@ -14,5 +14,7 @@
     <string name="gender">Gender:</string>
     <string name="dob">DOB:</string>
     <string name="phone">Phone:</string>
-    <string name="confirm">Confirm</string>
+    <string name="display_qr">Display QR</string>
+    <string name="qr_code">QR Code</string>
+    <string name="please_verify_and_generate_the_qr_code">Please verify and generate the qr code</string>
 </resources>

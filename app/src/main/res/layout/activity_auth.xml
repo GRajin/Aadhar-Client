@@ -13,6 +13,7 @@
         android:layout_margin="30dp"
         android:gravity="center"
         android:text="@string/authentication"
+        android:textStyle="bold"
         android:textSize="20sp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -27,7 +28,20 @@
         android:visibility="invisible"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/txtHead"/>
+        app:layout_constraintTop_toBottomOf="@id/txtHead" />
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/authAnim"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_margin="16dp"
+        app:layout_constraintBottom_toTopOf="@id/layPhone"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/progress"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
+        app:lottie_rawRes="@raw/auth" />
 
 
     <com.google.android.material.textfield.TextInputLayout
@@ -43,7 +57,7 @@
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/progress">
+        app:layout_constraintTop_toBottomOf="@id/authAnim">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/txtPhone"
@@ -57,6 +71,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/send"
+        android:textStyle="bold"
         app:cornerRadius="8dp"
         android:layout_margin="15dp"
         app:layout_constraintRight_toRightOf="parent"
@@ -92,6 +107,7 @@
         android:text="@string/authenticate"
         android:enabled="false"
         app:cornerRadius="8dp"
+        android:textStyle="bold"
         android:layout_margin="15dp"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/layOtp"/>

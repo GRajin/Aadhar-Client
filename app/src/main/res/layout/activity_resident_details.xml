@@ -6,16 +6,23 @@
     android:layout_height="match_parent"
     tools:context=".ResidentDetailsActivity">
 
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/imgProf"
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/crdProf"
         android:layout_width="150dp"
         android:layout_height="150dp"
         android:layout_marginTop="100dp"
+        app:cardCornerRadius="60dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="ImageContrastCheck"
-        tools:srcCompat="@tools:sample/avatars[0]" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/imgProf"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:srcCompat="@tools:sample/avatars[0]" />
+
+    </com.google.android.material.card.MaterialCardView>
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/gV5"
@@ -28,29 +35,29 @@
         android:id="@+id/txtName"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        android:fontFamily="@font/product_sans"
+        android:layout_margin="16dp"
+        android:fontFamily="@font/montserrat"
         android:gravity="center"
         android:textSize="30sp"
         android:textStyle="bold"
         tools:text="Rajin Gangadharan"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/imgProf" />
+        app:layout_constraintTop_toBottomOf="@id/crdProf" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/txtAadhar"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        android:fontFamily="@font/product_sans"
+        android:layout_margin="16dp"
+        android:fontFamily="@font/montserrat"
         android:gravity="center"
         android:textSize="25sp"
         android:textStyle="bold"
         tools:text="XXXX XXXX 4308"
         app:layout_constraintTop_toBottomOf="@id/txtName"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"/>
+        app:layout_constraintRight_toRightOf="parent" />
 
     <TextView
         android:id="@+id/headGen"
@@ -61,7 +68,7 @@
         android:text="@string/gender"
         android:gravity="end"
         android:textStyle="bold"
-        android:fontFamily="@font/product_sans"
+        android:fontFamily="@font/montserrat"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toLeftOf="@id/gV5"
         app:layout_constraintTop_toBottomOf="@id/txtAadhar" />
@@ -75,7 +82,7 @@
         android:gravity="start"
         android:textStyle="bold"
         tools:text="Male"
-        android:fontFamily="@font/product_sans"
+        android:fontFamily="@font/montserrat"
         app:layout_constraintLeft_toRightOf="@id/gV5"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/txtAadhar" />
@@ -89,7 +96,7 @@
         android:text="@string/dob"
         android:gravity="end"
         android:textStyle="bold"
-        android:fontFamily="@font/product_sans"
+        android:fontFamily="@font/montserrat"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toLeftOf="@id/gV5"
         app:layout_constraintTop_toBottomOf="@id/headGen" />
@@ -103,7 +110,7 @@
         android:gravity="start"
         android:textStyle="bold"
         tools:text="24-02-2003"
-        android:fontFamily="@font/product_sans"
+        android:fontFamily="@font/montserrat"
         app:layout_constraintLeft_toRightOf="@id/gV5"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/txtGen" />
@@ -117,7 +124,7 @@
         android:text="@string/phone"
         android:gravity="end"
         android:textStyle="bold"
-        android:fontFamily="@font/product_sans"
+        android:fontFamily="@font/montserrat"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toLeftOf="@id/gV5"
         app:layout_constraintTop_toBottomOf="@id/headDob" />
@@ -131,7 +138,7 @@
         android:gravity="start"
         android:textStyle="bold"
         tools:text="9150436546"
-        android:fontFamily="@font/product_sans"
+        android:fontFamily="@font/montserrat"
         app:layout_constraintLeft_toRightOf="@id/gV5"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/txtDob" />
@@ -141,9 +148,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
-        android:text="@string/confirm"
+        android:text="@string/qr_code"
+        android:textAllCaps="false"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/txtPhone"/>
+        app:layout_constraintTop_toBottomOf="@id/txtPhone" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
